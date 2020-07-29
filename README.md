@@ -9,7 +9,7 @@
 ```bash
 pip install pyrraform
 ```
-or 
+or
 
 ```bash
 pip install --index-url https://test.pypi.org/simple/ pyrraform
@@ -22,3 +22,13 @@ from pyrraform.tf_cmder import Terraform
 Terraform().init().run().plan().run().apply().run()
 ```
 Just one line code!
+
+# Source Code
+## Run test
+```bash
+make test-docker
+```
+## Start development docker container
+```
+make start-dev-docker
+```
