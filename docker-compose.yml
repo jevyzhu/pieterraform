@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  dev-env-srv:
+    image: ${CURRENT_PROJECT}-devenv:latest
+    build:
+        context: .
+        dockerfile: Dockerfile-dev
+        args:
+            USER_ID: $CURRENT_USER_ID
+            GROUP_ID: $CURRENT_GROUP_ID
+            DEV_USER: $DEV_USER
+    container_name: ${CURRENT_PROJECT}-devenv
+    volumes:
+        - "./:/home/${DEV_USER}/${CURRENT_PROJECT}"

@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestEnabled": true,
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "terminal.integrated.fontSize": 18,
+    "editor.fontSize": 20,
+    "extensions.showRecommendationsOnlyOnDemand": false
+}
