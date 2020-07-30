@@ -7,17 +7,18 @@
 # Install
 
 ```bash
-pip install pyrraform
+pip install pieterraform
 ```
 or
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ pyrraform
+pip install --index-url https://test.pypi.org/simple/ pieterraform
 ```
 
 # Quick start
 ```py
-from pyrraform.tf_cmder import Terraform
+from pieterraform.tf_cmder import Terraform
+
 # run 'terraform init', 'terraform plan' and 'terraform apply' in order
 Terraform().init().run().plan().run().apply().run()
 ```
