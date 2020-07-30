@@ -1,5 +1,5 @@
 #!/usr/bin/make
-PROJECT := pyrraform
+PROJECT := pieterraform
 DEV_CONTAINER := ${PROJECT}-devenv
 DEV_USER := hacker
 
