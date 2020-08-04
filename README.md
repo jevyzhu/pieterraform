@@ -16,6 +16,8 @@ pip install --index-url https://test.pypi.org/simple/ pieterraform
 ```
 
 # Quick start
+You can write code in "chain" style!
+
 ```py
 from pieterraform.tf_cmder import Terraform
 

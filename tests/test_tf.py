@@ -1,5 +1,5 @@
 from pytest import raises
-from pieterraform.tf_cmder import Terraform
+from pieterraform import Terraform
 import unittest
 
 

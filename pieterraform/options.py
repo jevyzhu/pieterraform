@@ -1,5 +1,3 @@
-from .cmd_runner_base import CmdRunnerBase
-
 class OptsBase:
     def __init__(self):
         self._options = []

@@ -1,7 +1,7 @@
 import logging
 import shutil
-from .cmd_context import CmdContext
-from .cmd_runner_base import CmdRunnerBase
+from .context import CmdContext
+from .runner_base import CmdRunnerBase
 from .options import TfCommonOpts, OptsBase
 from .arguments import ArgsBase
 
@@ -33,4 +33,4 @@ class Terraform(CmdContext):
 
 
 # To avoid circle ref
-from .sub_cmder_level1 import TfInit, TfPlan, TfApply, TfDestroy, TfVersion
+from .level1 import TfInit, TfPlan, TfApply, TfDestroy, TfVersion

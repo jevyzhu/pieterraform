@@ -3,15 +3,17 @@ from setuptools import setup, find_packages
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+project="pieterraform"
+
 setup(
-    name="pieterraform", # Replace with your own username
+    name=project,
     version="0.0.1.1a0",
     author="jingwei zhu",
     author_email="jingweizhucn@126.com",
     description="A Terraform Wrapper for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/jevyzhu/pieterraform",
+    url=f"https://github.com/jevyzhu/{project}",
     packages=find_packages(exclude=['ez_setup', 'tests*']),
     classifiers=[
         "Programming Language :: Python :: 3",

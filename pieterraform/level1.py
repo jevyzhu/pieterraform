@@ -1,18 +1,18 @@
 from typing import List
 import logging
-from .cmd_runner_base import CmdRunnerBase
-from .tf_cmder import Terraform
+from .runner_base import CmdRunnerBase
+from .terraform import Terraform
 from .arguments import ArgsBase
 from .options import OptsBase, TfCommonOpts
 
 
-class Tf1stCmdRunner(CmdRunnerBase):
+class TfCmdRunner(CmdRunnerBase):
     def run(self) -> Terraform: return super().run()
 
 
-class TfVersion(Tf1stCmdRunner, TfCommonOpts):
+class TfVersion(TfCmdRunner, TfCommonOpts):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
-        Tf1stCmdRunner.__init__(self, parent_cmder, 'version', logger)
+        TfCmdRunner.__init__(self, parent_cmder, 'version', logger)
         TfCommonOpts.__init__(self)
 
     @property
@@ -20,9 +20,9 @@ class TfVersion(Tf1stCmdRunner, TfCommonOpts):
         return self.options
 
 
-class TfInit(Tf1stCmdRunner, TfCommonOpts):
+class TfInit(TfCmdRunner, TfCommonOpts):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
-        Tf1stCmdRunner.__init__(self, parent_cmder, 'init', logger)
+        TfCmdRunner.__init__(self, parent_cmder, 'init', logger)
         TfCommonOpts.__init__(self)
 
     @property
@@ -33,9 +33,9 @@ class TfInit(Tf1stCmdRunner, TfCommonOpts):
     def no_upgrade(self): pass
 
 
-class TfPlan(Tf1stCmdRunner, TfCommonOpts, ArgsBase):
+class TfPlan(TfCmdRunner, TfCommonOpts, ArgsBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
-        Tf1stCmdRunner.__init__(self, parent_cmder, 'plan', logger)
+        TfCmdRunner.__init__(self, parent_cmder, 'plan', logger)
         TfCommonOpts.__init__(self)
         ArgsBase.__init__(self)
         self._var_param_str = None
@@ -60,9 +60,9 @@ class TfPlan(Tf1stCmdRunner, TfCommonOpts, ArgsBase):
         return self.options + self.arguments
 
 
-class TfApply(Tf1stCmdRunner, TfCommonOpts, ArgsBase):
+class TfApply(TfCmdRunner, TfCommonOpts, ArgsBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
-        Tf1stCmdRunner.__init__(self, parent_cmder, 'apply', logger)
+        TfCmdRunner.__init__(self, parent_cmder, 'apply', logger)
         TfCommonOpts.__init__(self)
         ArgsBase.__init__(self)
 
@@ -74,10 +74,14 @@ class TfApply(Tf1stCmdRunner, TfCommonOpts, ArgsBase):
     def use(self, value: str):
         return value
 
+    @ArgsBase.param('-state')
+    def statefile(self, value: str):
+        return value
 
-class TfDestroy(Tf1stCmdRunner, TfCommonOpts, ArgsBase):
+
+class TfDestroy(TfCmdRunner, TfCommonOpts, ArgsBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
-        Tf1stCmdRunner.__init__(self, parent_cmder, 'destroy', logger)
+        TfCmdRunner.__init__(self, parent_cmder, 'destroy', logger)
         TfCommonOpts.__init__(self)
         ArgsBase.__init__(self)
 

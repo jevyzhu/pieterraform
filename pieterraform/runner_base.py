@@ -2,7 +2,7 @@ from typing import List
 from abc import ABC, abstractproperty
 import logging
 from .runit import run_it
-from .cmd_context import CmdContext, RunHistory
+from .context import CmdContext, RunHistory
 
 
 class CmdRunnerBase(ABC):
