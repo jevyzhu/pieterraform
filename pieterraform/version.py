@@ -1,4 +1,4 @@
-VERSION = (0, 0, 1, '2a0')
+VERSION = (0, 0, 1, '2a1')
 PROJECT = 'pieterraform'
 
 
