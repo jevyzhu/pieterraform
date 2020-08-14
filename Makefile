@@ -37,13 +37,13 @@ test:
 	@if [[ -z "${IN_DEV_DOCKER}" ]]; then \
 		$(dev-docker) > /dev/null &&\
 		docker exec ${DEV_CONTAINER} \
-		pytest \
+		pytest  -vv \
 			--cov=${PROJECT} \
 			--cov-report=term \
 			--cov-report=html:coverage-report \
 			-v tests \
 	;else \
-		pytest \
+		pytest -vv  \
 			--cov=${PROJECT} \
 			--cov-report=term \
 			--cov-report=html:coverage-report \

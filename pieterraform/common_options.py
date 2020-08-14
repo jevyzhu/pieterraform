@@ -1,5 +1,6 @@
 from .option_base import OptionBase
 
+
 class TfCommonOpts(OptionBase):
     def __init__(self):
         super().__init__()

@@ -8,7 +8,6 @@ from .common_options import TfCommonOpts
 from .option_base import OptionBase
 
 
-
 class TfCmdRunner(CmdRunnerBase):
     def run(self) -> Terraform:
         return super().run()
@@ -103,4 +102,3 @@ class TfDestroy(TfCmdRunner, TfCommonOpts, ArgumentBase):
     @ArgumentBase.param('-state')
     def statefile(self, value: str):
         return value
-

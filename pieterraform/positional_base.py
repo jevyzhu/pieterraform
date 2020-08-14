@@ -7,8 +7,8 @@ class PositionalBase:
             result = func(self, *args, **kwargs)
             self._positionals.append(result)
             return self
-        return wrapper
 
+        return wrapper
 
     @property
     def positionargs(self):
