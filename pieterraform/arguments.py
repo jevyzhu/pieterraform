@@ -14,7 +14,9 @@ class ArgsBase:
                 else:
                     self._arguments.append((result))
                 return self
+
             return wrapper
+
         return wrap
 
     @property

@@ -6,7 +6,8 @@ from .context import CmdContext, RunHistory
 
 
 class CmdRunnerBase(ABC):
-    def __init__(self, context: CmdContext,
+    def __init__(self,
+                 context: CmdContext,
                  cmd: str = '',
                  logger: logging = None):
         self._context = context
@@ -19,10 +20,12 @@ class CmdRunnerBase(ABC):
             + self.all_arguments
         output = None
         if not self._context._fake_run:
-            output = run_it(cmd, self._logger,
+            output = run_it(cmd,
+                            self._logger,
                             work_dir=self._context._work_dir)
-        self._context.run_history.append(RunHistory(cmd, output))
+        self._context.results.append(RunHistory(cmd, output))
         return self._context
 
     @abstractproperty
-    def all_arguments(self) -> List: pass
+    def all_arguments(self) -> List:
+        pass

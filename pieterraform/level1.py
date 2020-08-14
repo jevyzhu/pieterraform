@@ -7,7 +7,8 @@ from .options import OptsBase, TfCommonOpts
 
 
 class TfCmdRunner(CmdRunnerBase):
-    def run(self) -> Terraform: return super().run()
+    def run(self) -> Terraform:
+        return super().run()
 
 
 class TfVersion(TfCmdRunner, TfCommonOpts):
@@ -30,7 +31,8 @@ class TfInit(TfCmdRunner, TfCommonOpts):
         return self.options
 
     @OptsBase.option('-upgrade=false')
-    def no_upgrade(self): pass
+    def no_upgrade(self):
+        pass
 
 
 class TfPlan(TfCmdRunner, TfCommonOpts, ArgsBase):
@@ -41,7 +43,8 @@ class TfPlan(TfCmdRunner, TfCommonOpts, ArgsBase):
         self._var_param_str = None
 
     @OptsBase.option('-destroy')
-    def destroy(self): pass
+    def destroy(self):
+        pass
 
     @ArgsBase.param('-var')
     def var(self, k: str, v: str):
@@ -90,4 +93,5 @@ class TfDestroy(TfCmdRunner, TfCommonOpts, ArgsBase):
         return self.options + self.arguments
 
     @OptsBase.option('-auto-approve')
-    def auto_approve(self): pass
+    def auto_approve(self):
+        pass

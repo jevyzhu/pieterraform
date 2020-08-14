@@ -12,7 +12,7 @@ class CmdContext:
         self._cmd = cmd
         self._work_dir = work_dir
         self._last_run = None
-        self._run_history: List[RunHistory] = []
+        self._results: List[RunHistory] = []
         self._fake_run = False
 
     def workdir(self, value: str):
@@ -24,13 +24,13 @@ class CmdContext:
         return self._cmd
 
     @property
-    def run_history(self) -> List[RunHistory]:
-        return self._run_history
+    def results(self) -> List[RunHistory]:
+        return self._results
 
     @property
-    def last_run(self) -> RunHistory:
-        if len(self._run_history) > 0:
-            return self._run_history[-1]
+    def last_result(self) -> RunHistory:
+        if len(self.results) > 0:
+            return self.results[-1]
         return None
 
     def fake_run(self):
@@ -40,3 +40,6 @@ class CmdContext:
     def real_run(self):
         self._fake_run = False
         return self
+
+    def clean_result(self):
+        self.results.clear()

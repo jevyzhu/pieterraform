@@ -1,8 +1,12 @@
+-r requirements.txt
+
 pytest
 pytest-cov
 coverage
+yapf
+rope
 twine
 setuptools
 wheel
-ptpython
 autopep8
+ptpython

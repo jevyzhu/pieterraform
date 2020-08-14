@@ -32,8 +32,7 @@ def run_it(command: List[str],
         raise subprocess.CalledProcessError(rc, command, outputs)
 
 
-def __get_logger_type(output: str,
-                      logger: logging.Logger):
+def __get_logger_type(output: str, logger: logging.Logger):
     if 'error' in output.lower():
         return logger.error
     if 'warn' in output.lower():

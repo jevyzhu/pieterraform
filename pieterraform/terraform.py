@@ -5,14 +5,16 @@ from .runner_base import CmdRunnerBase
 from .options import TfCommonOpts, OptsBase
 from .arguments import ArgsBase
 
-class Terraform(CmdContext):
 
-    def __init__(self, tf_exec_path: str = 'terraform', logger: logging = None):
+class Terraform(CmdContext):
+    def __init__(self,
+                 tf_exec_path: str = 'terraform',
+                 logger: logging = None):
         tf_exec = shutil.which(tf_exec_path)
         if tf_exec:
             self._tf_exec = tf_exec_path
         else:
-            raise FileNotFoundError(f'Cannot find {terraform_exec_path}')
+            raise FileNotFoundError(f'Cannot find {tf_exec_path}')
         super().__init__([self._tf_exec], '.')
         self._logger = logger
 

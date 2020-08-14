@@ -18,20 +18,40 @@ pip install --index-url https://test.pypi.org/simple/ pieterraform
 # Quick start
 You can write code in "chain" style!
 
+## Super simple
 ```py
 from pieterraform.tf_cmder import Terraform
 
-# run 'terraform init', 'terraform plan' and 'terraform apply' in order
-Terraform().init().run().plan().run().apply().run()
+# run 'terraform init', 'terraform plan' and 'terraform apply'
+Terraform().workdir('./tests/tf').init().run().plan().run().apply().run()
 ```
-Just one line code!
+Just **ONE LINE** code!
+
+## With console output
+```py
+from pieterraform.tf_cmder import Terraform
+
+# create a logger connect to console
+logFormatter = logging.Formatter('%(asctime)s [%(levelname)-5.5s] %(message)s')
+logger = logging.getLogger('fool_log')
+logger.setLevel(logging.DEBUG)
+c_handler = logging.StreamHandler()
+c_handler.setFormatter(logFormatter)
+c_handler.setLevel(logging.DEBUG)
+logger.addHandler(c_handler)
+
+# run 'terraform init', 'terraform plan' and 'terraform apply'
+# this will print log out in screen
+Terraform(logger=logger).workdir('./tests/tf').init().run().plan().run().apply().run()
+```
 
 # Source Code
+
 ## Run test
 ```bash
-make test-docker
+make test
 ```
 ## Start development docker container
 ```
-make start-dev-docker
+make docker-dev
 ```

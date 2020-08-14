@@ -1,21 +1,15 @@
 #!/bin/bash
 
+# add vscode extensions here
 extensions=( 
 "ms-python.python" 
 "njpwerner.autodocstring"
 "formulahendry.code-runner"
 "shardulm94.trailing-spaces"
 "christian-kohler.path-intellisense"
-"4ops.terraform"
 "kevinrose.vsc-python-indent"
 "ypresto.vscode-intelli-refactor"
 )
-
-#script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-#echo $script_dir
-#pushd $script_dir
-#extensions=$(sed -e '/^[ \t]*\/\//d' devcontainer.json | jq '.extensions[]' | xargs)
-#popd
 
 # make extensions arguments
 extensions_arg_str=

@@ -1,19 +1,18 @@
 from setuptools import setup, find_packages
+from pieterraform.version import PROJECT, get_version
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-project="pieterraform"
-
 setup(
-    name=project,
-    version="0.0.1.1a0",
+    name=PROJECT,
+    version=f"{get_version()}",
     author="jingwei zhu",
     author_email="jingweizhucn@126.com",
     description="A Terraform Wrapper for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url=f"https://github.com/jevyzhu/{project}",
+    url=f"https://github.com/jevyzhu/{PROJECT}",
     packages=find_packages(exclude=['ez_setup', 'tests*']),
     classifiers=[
         "Programming Language :: Python :: 3",

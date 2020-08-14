@@ -8,15 +8,20 @@ class OptsBase:
                 self._options.append(opt)
                 func(self, *args, **kwargs)
                 return self
+
             return wrapper
+
         return wrap
 
     @property
-    def options(self): return self._options
+    def options(self):
+        return self._options
+
 
 class TfCommonOpts(OptsBase):
     def __init__(self):
         super().__init__()
 
     @OptsBase.option('-no-color')
-    def no_color(self): return self
+    def no_color(self):
+        return self
