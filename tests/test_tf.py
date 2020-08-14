@@ -30,7 +30,8 @@ class test_tf_mini(unittest.TestCase):
         command = one_run.last_result.command
         assert ['terraform', 'apply', '-no-color'] == command
         command = one_run.results[1].command
-        assert ['terraform', 'plan', '-var', 'foo={a=3 b=4}', 'prod'] == command
+        assert ['terraform', 'plan', '-var', 'foo={a=3 b=4}',
+                'prod'] == command
 
     def test_init_plan_apply_destroy(self):
         one_run = Terraform().workdir('./tests/tf').fake_run() \
@@ -45,10 +46,8 @@ class test_tf_mini(unittest.TestCase):
         assert ['terraform', 'init', '-upgrade=false'] == command
         command = one_run.results[1].command
         assert [
-            'terraform', 'plan', '-no-color',
-            '-var', 'foo={a=3 b=4}',
-            '-out', 'me',
-            '-var', 'c=5'
+            'terraform', 'plan', '-no-color', '-var', 'foo={a=3 b=4}', '-out',
+            'me', '-var', 'c=5'
         ] == command
         command = one_run.results[2].command
         assert ['terraform', 'apply', '-no-color', 'me'] == command

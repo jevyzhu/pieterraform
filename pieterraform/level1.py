@@ -61,7 +61,7 @@ class TfPlan(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):
         return value
 
     @PositionalBase.positional
-    def dir(self, value:str):
+    def dir(self, value: str):
         return value
 
     @property
