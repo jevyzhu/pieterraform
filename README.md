@@ -13,7 +13,7 @@ pip install pieterraform
 # Quick start
 You can write code in "chain" style!
 
-## Super simple
+## very simple
 ```py
 from pieterraform.tf_cmder import Terraform
 
@@ -22,7 +22,7 @@ Terraform().workdir('./tests/tf').init().run().plan().run().apply().run()
 ```
 Just **ONE LINE** code!
 
-## With console output
+## enable console output
 ```py
 from pieterraform.tf_cmder import Terraform
 
