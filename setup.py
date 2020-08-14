@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name=PROJECT,
-    version=f"{get_version()}",
+    version=get_version(),
     author="jingwei zhu",
     author_email="jingweizhucn@126.com",
     description="A Terraform Wrapper for Python",
