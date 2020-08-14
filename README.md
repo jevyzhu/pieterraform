@@ -17,8 +17,9 @@ You can write code in "chain" style!
 ```py
 from pieterraform.tf_cmder import Terraform
 
+# suppose you have terraform files in ./tf
 # run 'terraform init', 'terraform plan' and 'terraform apply'
-Terraform().workdir('./tests/tf').init().run().plan().run().apply().run()
+Terraform().workdir('./tf').init().run().plan().run().apply().run()
 ```
 Just **ONE LINE** code!
 
@@ -35,9 +36,10 @@ c_handler.setFormatter(logFormatter)
 c_handler.setLevel(logging.DEBUG)
 logger.addHandler(c_handler)
 
+# suppose you have terraform files in ./tf
 # run 'terraform init', 'terraform plan' and 'terraform apply'
 # this will print log out in screen
-Terraform(logger=logger).workdir('./tests/tf').init().run().plan().run().apply().run()
+Terraform(logger=logger).workdir('./tf').init().run().plan().run().apply().run()
 ```
 
 # Source Code
