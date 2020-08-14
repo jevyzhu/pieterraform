@@ -37,12 +37,12 @@ class TfInit(TfCmdRunner, TfCommonOpts):
         pass
 
 
-class TfPlan(TfCmdRunner, TfCommonOpts, ArgumentBase):
+class TfPlan(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, 'plan', logger)
         TfCommonOpts.__init__(self)
         ArgumentBase.__init__(self)
-        self._var_param_str = None
+        PositionalBase.__init__(self)
 
     @OptionBase.option('-destroy')
     def destroy(self):
@@ -60,9 +60,13 @@ class TfPlan(TfCmdRunner, TfCommonOpts, ArgumentBase):
     def statefile(self, value: str):
         return value
 
+    @PositionalBase.positional
+    def dir(self, value:str):
+        return value
+
     @property
     def all_arguments(self) -> List:
-        return self.options + self.arguments
+        return self.options + self.arguments + self.positionargs
 
 
 class TfApply(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):

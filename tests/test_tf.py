@@ -23,11 +23,14 @@ class test_tf_mini(unittest.TestCase):
                 'foo={a=3 b=4}'] == one_run.results[-1].command
 
     def test_init_plan_apply(self):
-        last_result = Terraform().workdir('./tests/tf').fake_run() \
+        one_run = Terraform().workdir('./tests/tf').fake_run() \
         .init().no_upgrade().run() \
-        .plan().no_color().var('foo', '{a=3 b=4}').run() \
-        .apply().no_color().run().last_result
-        assert ['terraform', 'apply', '-no-color'] == last_result.command
+        .plan().var('foo', '{a=3 b=4}').dir('prod').run() \
+        .apply().no_color().run()
+        command = one_run.last_result.command
+        assert ['terraform', 'apply', '-no-color'] == command
+        command = one_run.results[1].command
+        assert ['terraform', 'plan', '-var', 'foo={a=3 b=4}', 'prod'] == command
 
     def test_init_plan_apply_destroy(self):
         one_run = Terraform().workdir('./tests/tf').fake_run() \
