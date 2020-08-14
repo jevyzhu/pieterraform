@@ -31,22 +31,22 @@ class test_tf_mini(unittest.TestCase):
     def test_init_plan_apply_destroy(self):
         one_run = Terraform().workdir('./tests/tf').fake_run() \
             .init().no_upgrade().run() \
-            .plan().no_color().var('foo', '{a=3 b=4}').run() \
-            .apply().no_color().run() \
-            .destroy().auto_approve().run()
+            .plan().no_color().var('foo', '{a=3 b=4}').out('me').run() \
+            .apply().no_color().use_plan('me').run() \
+            .destroy().auto_approve().statefile('me').run()
         command = one_run.last_result.command
-        assert ['terraform', 'destroy', '-auto-approve'] == command
+        assert ['terraform', 'destroy', '-auto-approve', '-state', 'me'] == command
         command = one_run.results[0].command
         assert ['terraform', 'init', '-upgrade=false'] == command
         command = one_run.results[1].command
         assert ['terraform', 'plan', '-no-color', '-var',
-                'foo={a=3 b=4}'] == command
+                'foo={a=3 b=4}', '-out', 'me'] == command
         command = one_run.results[2].command
-        assert ['terraform', 'apply', '-no-color'] == command
+        assert ['terraform', 'apply', '-no-color', 'me'] == command
 
     def test_init_plan_state(self):
         command = Terraform().workdir('./tests/tf').fake_run() \
             .init().no_upgrade().run() \
-            .plan().no_color().statefile('./state.json').run().last_result.command
+            .plan().statefile('./state.json').no_color().run().last_result.command
         assert ['terraform', 'plan', '-no-color', '-state',
                 './state.json'] == command

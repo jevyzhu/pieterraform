@@ -1,4 +1,4 @@
-class OptsBase:
+class OptionBase:
     def __init__(self):
         self._options = []
 
@@ -18,10 +18,10 @@ class OptsBase:
         return self._options
 
 
-class TfCommonOpts(OptsBase):
+class TfCommonOpts(OptionBase):
     def __init__(self):
         super().__init__()
 
-    @OptsBase.option('-no-color')
+    @OptionBase.option('-no-color')
     def no_color(self):
         return self

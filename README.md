@@ -10,10 +10,10 @@
 pip install pieterraform
 ```
 
-# Quick start
+# Usage
 You can write code in "chain" style!
 
-## very simple
+## Quick start
 ```py
 from pieterraform.tf_cmder import Terraform
 
@@ -23,7 +23,20 @@ Terraform().workdir('./tf').init().run().plan().run().apply().run()
 ```
 Just **ONE LINE** code!
 
-## enable console output
+## With terraform paramers
+```py
+from pieterraform.tf_cmder import Terraform
+
+# suppose you have terraform files in ./tf
+# run 'terraform init -no-color -upgrade=false', 'terraform plan -state mystate.json -no-color', 'terraform apply myplan' and 'terraform destroy -auto-approve -state mystate.json'
+
+Terraform().workdir('./tf').init().no_upgrade().no_color().run()
+    .plan().state_file('mystate,json').no_color().out('myplan').run()
+    .apply().use_plan('myplan').run()
+    .destroy().auto_approve().state('mystate.json').run()
+```
+
+## With log to console
 ```py
 from pieterraform.tf_cmder import Terraform
 

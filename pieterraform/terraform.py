@@ -2,8 +2,6 @@ import logging
 import shutil
 from .context import CmdContext
 from .runner_base import CmdRunnerBase
-from .options import TfCommonOpts, OptsBase
-from .arguments import ArgsBase
 
 
 class Terraform(CmdContext):

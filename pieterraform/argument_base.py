@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 
-class ArgsBase:
+class ArgumentBase:
     def __init__(self):
         self._arguments: List[Tuple[str, str]] = []
 
