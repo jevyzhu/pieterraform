@@ -9,11 +9,6 @@
 ```bash
 pip install pieterraform
 ```
-or
-
-```bash
-pip install --index-url https://test.pypi.org/simple/ pieterraform
-```
 
 # Quick start
 You can write code in "chain" style!
@@ -47,11 +42,22 @@ Terraform(logger=logger).workdir('./tests/tf').init().run().plan().run().apply()
 
 # Source Code
 
+## Prerequisition
+* docker: ">= 17.06"
+* docker-compose: ">= 1.26"
+
 ## Run test
 ```bash
 make test
 ```
-## Start development docker container
+
+## Development
+
+### Start dev docker
 ```
 make docker-dev
 ```
+this will start a container named pieterraform-devenv
+
+### Use VSCode
+Open your vscode, attach to above container to do remote development
