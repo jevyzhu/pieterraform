@@ -34,9 +34,14 @@ Just **ONE LINE** code!
 from pieterraform import Terraform
 
 # suppose you have terraform files in ./tf
-# run 'terraform init -no-color -upgrade=false', 'terraform plan -state mystate.json -no-color', 'terraform apply myplan' and 'terraform destroy -auto-approve -state mystate.json'
+# to run following commands in order:
+# 'terraform init -no-color -upgrade=false'
+# 'terraform plan -state mystate.json -no-color' 
+# 'terraform apply myplan' 
+# 'terraform destroy -auto-approve -state mystate.json'
 
-Terraform().workdir('./tf').init().no_upgrade().no_color().run()
+Terraform().workdir('./tf')
+    .init().no_upgrade().no_color().run()
     .plan().state_file('mystate.json').no_color().out('myplan').run()
     .apply().use_plan('myplan').run()
     .destroy().auto_approve().state('mystate.json').run()
