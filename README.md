@@ -38,6 +38,7 @@ Terraform().workdir('./tf').init().no_upgrade().no_color().run()
 
 ## With log to console
 ```py
+import logging
 from pieterraform.tf_cmder import Terraform
 
 # create a logger connect to console
