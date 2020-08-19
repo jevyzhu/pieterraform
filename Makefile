@@ -72,9 +72,9 @@ autopep8:
 	@if [[ -z "${IN_DEV_DOCKER}" ]]; then \
 		$(dev-docker) > /dev/null &&\
 		docker exec ${DEV_CONTAINER}  \
-		/bin/bash -c " find . -name '*.py' | xargs autopep8 --in-place --aggressive " \
+		/bin/bash -c "autopep8 --in-place --recursive --aggressive --exclude='terraform.py' . " \
 	;else \
-		find . -name '*.py' | xargs autopep8 --in-place --aggressive  \
+		autopep8 --in-place --recursive --aggressive  --exclude='terraform.py' . \
 	;fi
 
 install: test

@@ -1,21 +1,27 @@
-# Python Wrapper for Terraform
+# PieTerraform 
 
-> This is a wrapper for terraform to facilitate python developer to user terraform in nature way.
+> This is a wrapper for terraform to facilitate python developer to call terraform in very nature way.
 
 **Note**: it is still in development and only `python>=3.7` supported.
 
-# Install
+# Features
+
+* Builder mode: just one line code to call multiple terraform commands
+* Terraform commands' arguments are encapsulated as functions so code completion supported
+* No need to worry about the sequence of arguments 
+
+
+# Usage
+
+## Install from PyPi
 
 ```bash
 pip install pieterraform
 ```
 
-# Usage
-You can write code in "chain" style!
-
 ## Quick start
 ```py
-from pieterraform.tf_cmder import Terraform
+from pieterraform import Terraform
 
 # suppose you have terraform files in ./tf
 # run 'terraform init', 'terraform plan' and 'terraform apply'
@@ -25,7 +31,7 @@ Just **ONE LINE** code!
 
 ## With terraform paramers
 ```py
-from pieterraform.tf_cmder import Terraform
+from pieterraform import Terraform
 
 # suppose you have terraform files in ./tf
 # run 'terraform init -no-color -upgrade=false', 'terraform plan -state mystate.json -no-color', 'terraform apply myplan' and 'terraform destroy -auto-approve -state mystate.json'
@@ -36,10 +42,10 @@ Terraform().workdir('./tf').init().no_upgrade().no_color().run()
     .destroy().auto_approve().state('mystate.json').run()
 ```
 
-## With log to console
+## With log output
 ```py
 import logging
-from pieterraform.tf_cmder import Terraform
+from pieterraform import Terraform
 
 # create a logger connect to console
 logFormatter = logging.Formatter('%(asctime)s [%(levelname)-5.5s] %(message)s')
@@ -58,13 +64,21 @@ Terraform(logger=logger).workdir('./tf').init().run().plan().run().apply().run()
 
 # Source Code
 
+This project is fully using docker as dev environment
+
 ## Prerequisition
 * docker: ">= 17.06"
 * docker-compose: ">= 1.26"
 
+**No python** needed.
+
 ## Run test
 ```bash
 make test
+```
+## Distribution
+```bash
+make dist
 ```
 
 ## Development
