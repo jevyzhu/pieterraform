@@ -12,5 +12,8 @@ services:
             PROJECT: ${CURRENT_PROJECT}
             PYTHON_VER: ${PYTHON_VER}
     container_name: ${CURRENT_PROJECT}-devenv
+    environment:
+        - TWINE_USERNAME
+        - TWINE_PASSWORD
     volumes:
         - "./:/workspace/${CURRENT_PROJECT}"

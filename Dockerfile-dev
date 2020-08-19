@@ -8,7 +8,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN mkdir -p /etc/apt && touch /etc/apt/apt.conf \
     && echo "Acquire::http::proxy \"$HTTP_PROXY\";" > /etc/apt/apt.conf \ 
     && echo "Acquire::https::proxy \"$HTTP_PROXY\";" >> /etc/apt/apt.conf \ 
-    && apt-get update && apt-get install -y sudo make unzip wget bash-completion
+    && apt-get update && apt-get install -y sudo make unzip wget bash-completion \
+    && pip install -U --upgrade pip
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=
@@ -46,7 +47,6 @@ CMD tail -f
 ENV PATH=/home/${USER_NAME}/.local/bin:$PATH
 COPY ./requirements*.txt /tmp/
 RUN pip install -U --no-cache-dir -r /tmp/requirements-dev.txt &&\
-    pip install -U --upgrade pip &&\
     sudo rm -fr /tmp/requirements*.txt
 
 # Download terraform

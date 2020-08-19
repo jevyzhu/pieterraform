@@ -3,7 +3,6 @@
 pytest
 pytest-cov
 coverage
-yapf
 rope
 twine
 setuptools

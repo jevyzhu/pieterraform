@@ -1,6 +1,6 @@
 #!/usr/bin/make
 
-PYTHON_VER := 3.8
+PYTHON_VER := 3.7
 PROJECT := pieterraform
 DEV_USER := dev
 DEV_CONTAINER := ${PROJECT}-devenv
@@ -11,7 +11,7 @@ SHELL = /bin/bash
 CURRENT_USER_ID := $(shell id -u ${USER}) 
 CURRENT_GROUP_ID := $(shell id -g ${USER}) 
 
-.PHONY: clean test dist dist-upload docker-dev pretty autopep8
+.PHONY: clean test dist dist-upload docker-dev autopep8 install
 
 define dev-docker =
 	env CURRENT_USER_ID=${CURRENT_USER_ID} \
@@ -68,15 +68,6 @@ clean:
 	@find . -name '__pycache__' -delete
 	@rm -fr dist build *egg*info* coverage* .coverage
 
-pretty:
-	@if [[ -z "${IN_DEV_DOCKER}" ]]; then \
-		$(dev-docker) > /dev/null &&\
-		docker exec ${DEV_CONTAINER}  \
-		yapf -i -r  .  > /dev/null 2>&1 ||: \
-	;else \
-		yapf -i -r  .  > /dev/null 2>&1 ||: \
-	;fi
-
 autopep8:
 	@if [[ -z "${IN_DEV_DOCKER}" ]]; then \
 		$(dev-docker) > /dev/null &&\
@@ -85,3 +76,6 @@ autopep8:
 	;else \
 		find . -name '*.py' | xargs autopep8 --in-place --aggressive  \
 	;fi
+
+install: test
+	python setup.py install --user
