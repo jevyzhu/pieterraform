@@ -1,6 +1,7 @@
 # PieTerraform
 
-> This is a wrapper for terraform to facilitate python developer to call terraform in very nature way.
+> This is a wrapper for terraform to facilitate python developer to call terraform.
+> It is designed to invoke terraform commands in **"Functional Chaining"** style
 
 **Note**: Only `python>=3.7` is supported.
 

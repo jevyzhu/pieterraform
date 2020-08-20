@@ -1,5 +1,5 @@
 from packaging.version import Version
-VERSION = (0, 0, 1, 'alpha', 2)
+VERSION = (0, 0, 1, 'alpha', 3)
 PROJECT = 'pieterraform'
 
 
