@@ -1,75 +1,145 @@
-# PieTerraform 
+# PieTerraform
 
 > This is a wrapper for terraform to facilitate python developer to call terraform in very nature way.
 
-**Note**: it is still in development and only `python>=3.7` supported.
+**Note**: Only `python>=3.7` is supported.
 
 # Features
 
-* Builder mode: just one line code to call multiple terraform commands
+* Builder pattern. One line code can call multiple terraform commands
 * Terraform commands' arguments are encapsulated as functions so code completion supported
-* No need to worry about the sequence of arguments 
+* No need to worry about the sequence of arguments
 
 
 # Usage
 
-## Install from PyPi
+Make sure have **terraform in $PATH**
+
+```bash
+terraform version
+```
+
+## Install
 
 ```bash
 pip install pieterraform
 ```
 
 ## Quick start
+
 ```py
+
 from pieterraform import Terraform
 
 # suppose you have terraform files in ./tf
-# run 'terraform init', 'terraform plan' and 'terraform apply'
-Terraform().workdir('./tf').init().run().plan().run().apply().run()
+Terraform().workdir('./tf')
+    .init().run()           # 'terraform init'
+    .plan().run()           # 'terraform plan'
+    .apply().run()          # 'terraform apply'
+
+# suppose you have terraform files in ./tf/prod
+Terraform().workdir('./tf')
+    .init().dir('prod').run()
+    .plan().dir('prod').run()
+    .apply().dir('prod').run()
+
+# suppose you have terraform files in ./tf/prod
+Terraform().workdir()
+    .init().dir('tf/prod').run()
+    .plan().dir('tf/prod').run()
+    .apply().dir('tf/prod').run()
+
 ```
 Just **ONE LINE** code!
 
-## With terraform paramers
+## With Paramers
+
 ```py
+
 from pieterraform import Terraform
 
 # suppose you have terraform files in ./tf
-# to run following commands in order:
-# 'terraform init -no-color -upgrade=false'
-# 'terraform plan -state mystate.json -no-color' 
-# 'terraform apply myplan' 
-# 'terraform destroy -auto-approve -state mystate.json'
-
 Terraform().workdir('./tf')
+    # 'terraform init -no-color -upgrade=false'
     .init().no_upgrade().no_color().run()
+    # 'terraform plan -state mystate.json -no-color'
     .plan().state_file('mystate.json').no_color().out('myplan').run()
+    # 'terraform apply myplan'
     .apply().use_plan('myplan').run()
+    # 'terraform destroy -auto-approve -state mystate.json'
     .destroy().auto_approve().state('mystate.json').run()
+
 ```
 
-## With log output
+## With Custome Log
+By default it prints log in screen.
+But you can cusomize it to use any logger
+
 ```py
+
 import logging
 from pieterraform import Terraform
 
-# create a logger connect to console
+# output log to file
 logFormatter = logging.Formatter('%(asctime)s [%(levelname)-5.5s] %(message)s')
-logger = logging.getLogger('fool_log')
+log_file = 'log.txt'
+f_handler = logging.FileHandler(log_file)
+f_handler.setFormatter(logFormatter)
+f_handler.setLevel(logging.DEBUG)
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-c_handler = logging.StreamHandler()
-c_handler.setFormatter(logFormatter)
-c_handler.setLevel(logging.DEBUG)
-logger.addHandler(c_handler)
+logger.addHandler(f_handler)
 
 # suppose you have terraform files in ./tf
-# run 'terraform init', 'terraform plan' and 'terraform apply'
-# this will print log out in screen
-Terraform(logger=logger).workdir('./tf').init().run().plan().run().apply().run()
+Terraform(logger=logger) # this will output log to file 'log.txt'
+    .workdir('./tf')
+    .init().run()
+    .plan().run()
+    .apply().run()
+
 ```
+
+## Traditional calls rather than functions chain
+
+```py
+
+from pieterraform import Terraform
+
+tf = Terraform().workdir('./tf')
+initer = tf.init()
+initer.no_upgrade()
+initer.no_color().run()
+planer = tf.plan()
+planer.state_file('mystate.json')
+planer.no_color()
+planer.out('myplan').run()
+applyer = tf.apply()
+applyer.use_plan('myplan')
+applyer.run()
+
+```
+
+## Check result
+```py
+
+from pieterraform import Terraform
+
+a_run = Terraform().workdir('./tf')
+    .init().run()
+    .plan().run()
+    .apply().run()
+
+for r in a_run.results:
+    print(r.output)
+    print(r.command)
+
+```
+
+
 
 # Source Code
 
-This project is fully using docker as dev environment
+This project is fully using docker as dev environment.
 
 ## Prerequisition
 * docker: ">= 17.06"
@@ -77,6 +147,14 @@ This project is fully using docker as dev environment
 
 **No python** needed.
 
+## Build
+```bash
+make
+```
+## Install to local
+```bash
+make install
+```
 ## Run test
 ```bash
 make test

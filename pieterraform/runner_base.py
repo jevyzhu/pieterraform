@@ -26,6 +26,9 @@ class CmdRunnerBase(ABC):
         self._context.results.append(RunHistory(cmd, output))
         return self._context
 
-    @abstractproperty
+    @property
     def all_arguments(self) -> List:
-        pass
+        options = self.options if hasattr(self, 'options') else []
+        arguments = self.arguments if hasattr(self, 'arguments') else []
+        positions = self.positionargs if hasattr(self, 'positionargs') else []
+        return options + arguments + positions

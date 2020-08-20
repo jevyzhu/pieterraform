@@ -4,10 +4,21 @@ from .context import CmdContext
 from .runner_base import CmdRunnerBase
 
 
+
 class Terraform(CmdContext):
+    def __default_logger():
+        logFormatter = logging.Formatter('%(message)s')
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.DEBUG)
+        c_handler = logging.StreamHandler()
+        c_handler.setFormatter(logFormatter)
+        c_handler.setLevel(logging.DEBUG)
+        logger.addHandler(c_handler)
+        return logger
+
     def __init__(self,
                  tf_exec_path: str = 'terraform',
-                 logger: logging = None):
+                 logger: logging = __default_logger()):
         tf_exec = shutil.which(tf_exec_path)
         if tf_exec:
             self._tf_exec = tf_exec_path

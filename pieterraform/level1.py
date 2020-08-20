@@ -4,7 +4,7 @@ from .runner_base import CmdRunnerBase
 from .terraform import Terraform
 from .argument_base import ArgumentBase
 from .positional_base import PositionalBase
-from .common_options import TfCommonOpts
+from .common_args import TfCommonArgs
 from .option_base import OptionBase
 
 
@@ -13,36 +13,26 @@ class TfCmdRunner(CmdRunnerBase):
         return super().run()
 
 
-class TfVersion(TfCmdRunner, TfCommonOpts):
+class TfVersion(TfCmdRunner):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, 'version', logger)
-        TfCommonOpts.__init__(self)
-
-    @property
-    def all_arguments(self) -> List:
-        return self.options
 
 
-class TfInit(TfCmdRunner, TfCommonOpts):
+class TfInit(TfCmdRunner, TfCommonArgs):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, 'init', logger)
-        TfCommonOpts.__init__(self)
-
-    @property
-    def all_arguments(self) -> List:
-        return self.options
+        TfCommonArgs.__init__(self)
 
     @OptionBase.option('-upgrade=false')
     def no_upgrade(self):
         pass
 
 
-class TfPlan(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):
+class TfPlan(TfCmdRunner, TfCommonArgs, ArgumentBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, 'plan', logger)
-        TfCommonOpts.__init__(self)
+        TfCommonArgs.__init__(self)
         ArgumentBase.__init__(self)
-        PositionalBase.__init__(self)
 
     @OptionBase.option('-destroy')
     def destroy(self):
@@ -60,25 +50,12 @@ class TfPlan(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):
     def statefile(self, value: str):
         return value
 
-    @PositionalBase.positional
-    def dir(self, value: str):
-        return value
 
-    @property
-    def all_arguments(self) -> List:
-        return self.options + self.arguments + self.positionargs
-
-
-class TfApply(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):
+class TfApply(TfCmdRunner, TfCommonArgs, ArgumentBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, 'apply', logger)
-        TfCommonOpts.__init__(self)
+        TfCommonArgs.__init__(self)
         ArgumentBase.__init__(self)
-        PositionalBase.__init__(self)
-
-    @property
-    def all_arguments(self) -> List:
-        return self.options + self.arguments + self.positionargs
 
     @PositionalBase.positional
     def use_plan(self, value: str):
@@ -89,15 +66,11 @@ class TfApply(TfCmdRunner, TfCommonOpts, ArgumentBase, PositionalBase):
         return value
 
 
-class TfDestroy(TfCmdRunner, TfCommonOpts, ArgumentBase):
+class TfDestroy(TfCmdRunner, TfCommonArgs, ArgumentBase):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, 'destroy', logger)
-        TfCommonOpts.__init__(self)
+        TfCommonArgs.__init__(self)
         ArgumentBase.__init__(self)
-
-    @property
-    def all_arguments(self) -> List:
-        return self.options + self.arguments
 
     @OptionBase.option('-auto-approve')
     def auto_approve(self):
