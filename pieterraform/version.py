@@ -1,7 +1,7 @@
 from packaging.version import Version
 
 PROJECT = 'pieterraform'
-VERSION = Version('0.0.1.alpha.3')
+VERSION = Version('0.0.1.alpha.5')
 
 
 def get_version():

@@ -1,13 +1,11 @@
 import json
 import pathlib
+from argparse import Namespace
 
 
 class TfState:
-    class Object(object):
-        pass
-
     def __init__(self, state_file_path: str):
-        self.output = TfState.Object()
+        self.output = Namespace()
         with open(state_file_path, "r") as f:
             outputs = json.load(f)['outputs']
             for key in outputs:
