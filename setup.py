@@ -9,7 +9,7 @@ project = PROJECT
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with pathlib.Path('requirements.txt').open() as requirements_txt:
+with pathlib.Path("requirements.txt").open() as requirements_txt:
     install_requires = [
         str(requirement)
         for requirement in pkg_resources.parse_requirements(requirements_txt)
@@ -24,7 +24,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=f"https://github.com/jevyzhu/{project}",
-    packages=find_packages(exclude=['ez_setup', 'tests*']),
+    packages=find_packages(exclude=["ez_setup", "tests*"]),
     include_package_data=True,
     install_requires=install_requires,
     classifiers=[

@@ -3,20 +3,22 @@ import subprocess
 from typing import List
 
 
-def run_it(command: List[str],
-           logger: logging.Logger = None,
-           work_dir: str = '.') -> List[str]:
+def run_it(
+    command: List[str], logger: logging.Logger = None, work_dir: str = "."
+) -> List[str]:
     outputs = []
     if logger is not None:
         logger.debug(command)
-    process = subprocess.Popen(command,
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.STDOUT,
-                               universal_newlines=True,
-                               cwd=work_dir)
+    process = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        universal_newlines=True,
+        cwd=work_dir,
+    )
     while True:
         output = process.stdout.readline().strip()
-        if output == '' and process.poll() is not None:
+        if output == "" and process.poll() is not None:
             break
         if not output:
             continue
@@ -33,8 +35,8 @@ def run_it(command: List[str],
 
 
 def __get_logger_type(output: str, logger: logging.Logger):
-    if 'error' in output.lower():
+    if "error" in output.lower():
         return logger.error
-    if 'warn' in output.lower():
+    if "warn" in output.lower():
         return logger.warn
     return logger.info

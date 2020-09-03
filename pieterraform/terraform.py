@@ -4,10 +4,9 @@ from .context import CmdContext
 from .runner_base import CmdRunnerBase
 
 
-
 class Terraform(CmdContext):
     def __default_logger():
-        logFormatter = logging.Formatter('%(message)s')
+        logFormatter = logging.Formatter("%(message)s")
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
         c_handler = logging.StreamHandler()
@@ -16,15 +15,15 @@ class Terraform(CmdContext):
         logger.addHandler(c_handler)
         return logger
 
-    def __init__(self,
-                 tf_exec_path: str = 'terraform',
-                 logger: logging = __default_logger()):
+    def __init__(
+        self, tf_exec_path: str = "terraform", logger: logging = __default_logger()
+    ):
         tf_exec = shutil.which(tf_exec_path)
         if tf_exec:
             self._tf_exec = tf_exec_path
         else:
-            raise FileNotFoundError(f'Cannot find {tf_exec_path}')
-        super().__init__([self._tf_exec], '.')
+            raise FileNotFoundError(f"Cannot find {tf_exec_path}")
+        super().__init__([self._tf_exec], ".")
         self._logger = logger
 
     def version(self):

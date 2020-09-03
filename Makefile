@@ -11,7 +11,7 @@ SHELL = /bin/bash
 CURRENT_USER_ID := $(shell id -u ${USER}) 
 CURRENT_GROUP_ID := $(shell id -g ${USER}) 
 
-.PHONY: clean test dist dist-upload docker-dev autopep8 install
+.PHONY: clean test dist dist-upload docker-dev autopep8 black install
 
 define dev-docker =
 	env CURRENT_USER_ID=${CURRENT_USER_ID} \
@@ -76,6 +76,16 @@ autopep8:
 	;else \
 		autopep8 --in-place --recursive --aggressive  --exclude='terraform.py' . \
 	;fi
+
+black:
+	@if [[ -z "${IN_DEV_DOCKER}" ]]; then \
+		$(dev-docker) > /dev/null &&\
+		docker exec ${DEV_CONTAINER} \
+		/bin/bash -c "black -q  ." \
+	;else \
+		black -q . \
+	;fi
+
 
 install: test
 	python setup.py install --user
