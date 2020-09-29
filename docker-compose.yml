@@ -11,6 +11,7 @@ services:
             GROUP_ID: $CURRENT_GROUP_ID
             PROJECT: ${CURRENT_PROJECT}
             PYTHON_VER: ${PYTHON_VER}
+            PROXY: $PROXY
     container_name: ${CURRENT_PROJECT}-devenv
     environment:
         - TWINE_USERNAME

@@ -18,6 +18,7 @@ define dev-docker =
 	CURRENT_GROUP_ID=${CURRENT_GROUP_ID} \
 	CURRENT_PROJECT=${PROJECT} \
 	DEV_USER=${DEV_USER} \
+	PROXY=${HTTP_PROXY} \
 	PYTHON_VER=${PYTHON_VER} \
 	docker-compose up -d --build ${DEV_SRV}
 endef

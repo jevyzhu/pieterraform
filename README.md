@@ -142,7 +142,7 @@ for r in a_run.results:
 
 This project is fully using docker as dev environment.
 
-## Prerequisition
+## Prerequisites
 * docker: ">= 17.06"
 * docker-compose: ">= 1.26"
 

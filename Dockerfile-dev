@@ -2,6 +2,14 @@ ARG PYTHON_VER
 FROM python:${PYTHON_VER}-slim-buster
 ENV IN_DEV_DOCKER=1
 
+ARG PROXY
+ENV HTTP_PROXY=${PROXY}
+ENV HTTPS_PROXY=${PROXY}
+ENV NO_PROXY=localhost,127.0.0.1,local.home,::1
+ENV http_proxy=${PROXY}
+ENV https_proxy=${PROXY}
+ENV no_proxy=localhost,127.0.0.1,local.home,::1
+
 
 ENV DEBIAN_FRONTEND=noninteractive
 
