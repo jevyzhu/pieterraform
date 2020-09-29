@@ -41,6 +41,9 @@ class Terraform(CmdContext):
     def destroy(self):
         return TfDestroy(self, self._logger)
 
+    def output(self):
+        return TfOutput(self, self._logger)
+
 
 # To avoid circle ref
-from .level1 import TfInit, TfPlan, TfApply, TfDestroy, TfVersion
+from .level1 import TfInit, TfPlan, TfApply, TfDestroy, TfVersion, TfOutput

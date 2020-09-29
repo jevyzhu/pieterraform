@@ -8,7 +8,7 @@ import unittest
 class test_tf_mini(unittest.TestCase):
     def test_version(self):
         results = Terraform().version().run().results
-        assert "Terraform v0.13.1" == results[-1].output[0]
+        assert "Terraform v0.13.2" == results[-1].output[0]
 
     def test_init(self):
         results = (

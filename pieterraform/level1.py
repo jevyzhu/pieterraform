@@ -18,14 +18,23 @@ class TfVersion(TfCmdRunner):
         TfCmdRunner.__init__(self, parent_cmder, "version", logger)
 
 
-class TfInit(TfCmdRunner, TfCommonArgs):
+class TfInit(TfCmdRunner, ArgumentBase, TfCommonArgs):
     def __init__(self, parent_cmder: Terraform, logger: logging = None):
         TfCmdRunner.__init__(self, parent_cmder, "init", logger)
+        ArgumentBase.__init__(self)
         TfCommonArgs.__init__(self)
 
     @OptionBase.option("-upgrade=false")
     def no_upgrade(self):
         pass
+
+    @OptionBase.option("--reconfigure=true")
+    def reconfigure(self):
+        pass
+
+    @ArgumentBase.param("-backend-config")
+    def backend_config(self, value: str):
+        return value
 
 
 class TfPlan(TfCmdRunner, TfVarArgs):
@@ -72,3 +81,17 @@ class TfDestroy(TfCmdRunner, TfVarArgs):
     @ArgumentBase.param("-state")
     def statefile(self, value: str):
         return value
+
+
+class TfOutput(TfCmdRunner, TfCommonArgs):
+    def __init__(self, parent_cmder: Terraform, logger: logging = None):
+        TfCmdRunner.__init__(self, parent_cmder, "output", logger)
+        TfCommonArgs.__init__(self)
+
+    @ArgumentBase.param("-state")
+    def statefile(self, value: str):
+        return value
+
+    @OptionBase.option("-json=True")
+    def json(self):
+        pass

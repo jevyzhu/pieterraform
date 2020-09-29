@@ -16,17 +16,21 @@ def run_it(
         universal_newlines=True,
         cwd=work_dir,
     )
+    no_logger = False
     while True:
         output = process.stdout.readline().strip()
         if output == "" and process.poll() is not None:
             break
+        if output == "Outputs:" and not no_logger:
+            no_logger = True
         if not output:
             continue
         outputs.append(output)
         if logger is None:
             continue
         f = __get_logger_type(output, logger)
-        f(output)
+        if not no_logger:
+            f(output)
     rc = process.poll()
     if rc == 0:
         return outputs

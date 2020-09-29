@@ -50,7 +50,7 @@ RUN pip install -U --no-cache-dir -r /tmp/requirements-dev.txt &&\
     sudo rm -fr /tmp/requirements*.txt
 
 # Download terraform
-ARG TF_VERSION="0.13.1"
+ARG TF_VERSION="0.13.2"
 RUN wget -O /tmp/tf.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip \
     && sudo unzip /tmp/tf.zip -d /usr/bin/  \
     && rm -fr /tmp/tf.zip

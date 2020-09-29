@@ -11,13 +11,13 @@ class Var:
 
 
 class TfVars:
-    def __init__(self, tf_folder: str):
+    def __init__(self, tf_folder: str, tf_glob="*.tf"):
         self.current = -1
-        self._vars: Dict[str, TfVar] = {}
+        self._vars: Dict[str, Var] = {}
         variable_key = "variable"
         description_key = "description"
         default_key = "default"
-        for tf in pathlib.Path(tf_folder).glob("*.tf"):
+        for tf in pathlib.Path(tf_folder).glob(tf_glob):
             with tf.open("r") as f:
                 try:
                     data = hcl2.load(f)
